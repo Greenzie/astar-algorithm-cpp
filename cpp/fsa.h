@@ -236,7 +236,7 @@ public: // methods
 			);
 	}
 
-	unsigned int GetMaxElementCount(){ return m_MaxElements; };
+	unsigned int GetMaxElementCount() { return m_MaxElements; };
 
 public: // data
 
