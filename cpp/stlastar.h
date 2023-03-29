@@ -197,10 +197,16 @@ public: // methods
 			return m_State; 
 		}
 
+		bool maxNodesReached = false;
+		#if USE_FSA_MEMORY
+		maxNodesReached = m_AllocateNodeCount >= m_FixedSizeAllocator.GetMaxElementCount();
+		#endif
+
 		// Failure is defined as emptying the open list as there is nothing left to 
 		// search...
-		// New: Allow user abort
-		if( m_OpenList.empty() || m_CancelRequest )
+		// Allow user abort
+		// Check if FSA memory is full
+		if( m_OpenList.empty() || m_CancelRequest || maxNodesReached)
 		{
 			FreeAllNodes();
 			m_State = SEARCH_STATE_FAILED;
